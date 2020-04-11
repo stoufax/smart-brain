@@ -9,6 +9,8 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm'
 import Rank from './components/Rank/Rank'
 import FaceRecognition from './components/FaceRecognition/FaceRecognition'
 
+import { config } from './config'
+
 import './App.css'
 
 const paramsParticle = {
@@ -62,7 +64,7 @@ class App extends Component {
 
   onButtonChange = () => {
     this.setState({ imageUrl: this.state.input })
-    fetch('https://reco-face.herokuapp.com/imageUrl', {
+    fetch(config.backendUrl + 'imageUrl', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -72,7 +74,7 @@ class App extends Component {
       .then((response) => response.json())
       .then((response) => {
         if (response) {
-          fetch('https://reco-face.herokuapp.com/image', {
+          fetch(config.backendUrl + 'image', {
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
