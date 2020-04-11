@@ -1,0 +1,14 @@
+{
+  "name": "smart-brain",
+  "private": true,
+  "scripts": {
+    "backend": "yarn workspace @smart-brain/backend start",
+    "frontend": "yarn workspace @smart-brain/frontend start"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": []
+  }
+}
