@@ -4,6 +4,7 @@
   "scripts": {
     "backend": "yarn workspace @smart-brain/api start",
     "frontend": "yarn workspace @smart-brain/frontend start",
+    "build:frontend": "yarn workspace @smart-brain/frontend build",
     "lint": "eslint --ext .ts,.tsx .",
     "prettier": "prettier --ignore-path .prettierignore \"**/*.+(json|ts|tsx)\"",
     "format": "yarn prettier -- --write"
