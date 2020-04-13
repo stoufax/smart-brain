@@ -1,0 +1,9 @@
+.history
+.vscode
+node_modules/
+package.json
+packages/*/node_modules
+packages/*/dist
+packages/*/package.json
+packages/*/tsconfig.json
+packages/*/.prettierrc.json

@@ -1,0 +1,7 @@
+{
+  "editor.formatOnSave": true,
+  "html.format.indentInnerHtml": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}

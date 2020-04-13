@@ -2,13 +2,26 @@
   "name": "smart-brain",
   "private": true,
   "scripts": {
-    "backend": "yarn workspace @smart-brain/backend start",
-    "frontend": "yarn workspace @smart-brain/frontend start"
+    "backend": "yarn workspace @smart-brain/api start",
+    "frontend": "yarn workspace @smart-brain/frontend start",
+    "lint": "eslint --ext .ts,.tsx .",
+    "prettier": "prettier --ignore-path .prettierignore \"**/*.+(json|ts|tsx)\"",
+    "format": "yarn prettier -- --write"
   },
   "workspaces": {
     "packages": [
       "packages/*"
     ],
     "nohoist": []
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-react": "^7.18.3",
+    "husky": "^4.2.1",
+    "lint-staged": "^10.0.7",
+    "prettier": "^1.19.1"
   }
 }

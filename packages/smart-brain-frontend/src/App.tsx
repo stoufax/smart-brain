@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Particles from 'react-particles-js'
+import Particles, { IParticlesParams } from 'react-particles-js'
 
 import Navigation from './components/Navigation/Navigation'
 import Signin from './components/Signin/Signin'
@@ -13,21 +13,43 @@ import { config } from './config'
 
 import './App.css'
 
-const paramsParticle = {
+const paramsParticle: IParticlesParams = {
   particles: {
     number: {
       value: 80,
       density: {
         enable: true,
+        // eslint-disable-next-line @typescript-eslint/camelcase
         value_area: 800
       }
     }
   }
 }
 
-class App extends Component {
-  constructor() {
-    super()
+interface Props {}
+
+interface User {
+  id: string
+  name: string
+  email: string
+  password: string
+  entries: number
+  joined: string
+}
+
+interface State {
+  input: string
+  imageUrl: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  box: any
+  route: string
+  isSignin: boolean
+  user: User
+}
+
+class App extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
     this.state = {
       input: '',
       imageUrl: '',
@@ -45,7 +67,7 @@ class App extends Component {
     }
   }
 
-  loadUsers = (data) => {
+  loadUsers = (data: any) => {
     this.setState({
       user: {
         id: data.id,
@@ -58,8 +80,8 @@ class App extends Component {
     })
   }
 
-  onInputChange = (event) => {
-    this.setState({ input: event.target.value })
+  onInputChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>): void => {
+    this.setState({ input: value })
   }
 
   onButtonChange = () => {
@@ -83,7 +105,8 @@ class App extends Component {
           })
             .then((response) => response.json())
             .then((count) => {
-              this.setState(Object.assign(this.state.user, { entries: count }))
+              const user: User = { ...this.state.user, entries: count }
+              this.setState({ ...this.state, user })
             })
             .catch(console.log)
         }
@@ -92,12 +115,12 @@ class App extends Component {
       .catch((err) => console.log(err))
   }
 
-  boundingBox = (data) => {
-    let infoBox = data.outputs[0].data.regions
-    let sizeImage = document.querySelector('#faceReco')
-    let width = Number(sizeImage.width)
-    let height = Number(sizeImage.height)
-    const faces = infoBox.map((data) => {
+  boundingBox = (data: any) => {
+    const infoBox = data.outputs[0].data.regions
+    const sizeImage: any = document.querySelector('#faceReco')
+    const width = Number(sizeImage.width)
+    const height = Number(sizeImage.height)
+    const faces = infoBox.map((data: any) => {
       return {
         leftCol: data.region_info.bounding_box.left_col * width,
         righCol: width - data.region_info.bounding_box.right_col * width,
@@ -108,11 +131,11 @@ class App extends Component {
     return faces
   }
 
-  updateBox = (box) => {
+  updateBox = (box: any): void => {
     this.setState({ box: box })
   }
 
-  updateRoute = (route) => {
+  updateRoute = (route: string): void => {
     if (route === 'home') {
       this.setState({ isSignin: false })
     } else if (route === 'signin') {

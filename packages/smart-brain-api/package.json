@@ -1,10 +1,11 @@
 {
-  "name": "@smart-brain/backend",
+  "name": "@smart-brain/api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "develop": "nodemon server.js"
   },
   "keywords": [],
   "author": "",

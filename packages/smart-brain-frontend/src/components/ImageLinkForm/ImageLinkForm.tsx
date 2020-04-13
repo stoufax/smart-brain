@@ -1,7 +1,8 @@
 import React from 'react'
+
 import './ImageLinkForm.css'
 
-const ImageLinkForm = ({ onInputChange, onButtonChange }) => {
+const ImageLinkForm = ({ onInputChange, onButtonChange }: any) => {
   return (
     <div>
       <p className="f3">{'Einstein face recognition'}</p>

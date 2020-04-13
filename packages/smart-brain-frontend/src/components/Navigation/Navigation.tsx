@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Navigation = ({ isSignin, updateRoute }) => {
+const Navigation = ({ isSignin, updateRoute }: any) => {
   if (!isSignin) {
     return (
       <nav style={{ display: 'flex', justifyContent: 'flex-end' }}>

@@ -1,13 +1,14 @@
 import React from 'react'
+
 import './FaceRecognition.css'
 
-const FaceRecognition = ({ image, box }) => {
+const FaceRecognition = ({ image, box }: any) => {
   return (
     <div className="center ma">
       <div className="absolute mt2">
         <img id="faceReco" src={image} alt="" width="500px" height="auto" />
         {box.length
-          ? box.map((data, i) => {
+          ? box.map((data: any, i: number) => {
               return (
                 <div
                   className="face"

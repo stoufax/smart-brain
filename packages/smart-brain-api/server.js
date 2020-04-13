@@ -11,13 +11,15 @@ const profile = require('./controllers/profile')
 const image = require('./controllers/image')
 
 const saltRounds = 10
+
 const db = knex({
   client: 'pg',
   connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: true
+    connectionString: process.env.DATABASE_URL_LOCAL || process.env.DATABASE_URL_HEROKU,
+    ssl: process.env.DATABASE_URL_LOCAL ? false : true
   }
 })
+
 const app = express()
 
 app.use(bodyParser.json())
@@ -48,15 +50,5 @@ app.post('/imageUrl', (req, res) => {
 })
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log('server is running')
+  console.log('server is running on ' + process.env.PORT + ' PORT')
 })
-
-/*
-
-/ --> res = this working
-/ signin --> POST = success/fail
-/register --> POST = user
-/profile/:uderId --> GET = user
-/image --> Put
-
-*/

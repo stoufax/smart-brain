@@ -1,6 +1,6 @@
 const handleRegister = (req, res, db, bcrypt, saltRounds) => {
   const { name, email, password } = req.body
-  var salt = bcrypt.genSaltSync(saltRounds)
+  const salt = bcrypt.genSaltSync(saltRounds)
   const hash = bcrypt.hashSync(password, salt)
   if (!name || !email || !password) {
     return res.status(400).json('incorrect submission')
