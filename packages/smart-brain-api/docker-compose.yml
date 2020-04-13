@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  #Backend api
+  smart-brain-api:
+    container_name: backend
+    build: ./
+    command: yarn develop
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/usr/src/smart-brain-backend
+      - /usr/src/smart-brain-backend/node_modules
+    links:
+      - postgres
+
+  #Postgres
+  postgres:
+    build: ./postgres
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_HOST=${DB_HOST}
+    ports:
+      - 5432:5432
