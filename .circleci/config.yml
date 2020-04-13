@@ -1,8 +1,20 @@
 version: 2.1
 jobs:
-  build:
+  web-server:
     docker:
       - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
     steps:
       - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
+      - run: echo "web-server" # run the `echo` command
+  web-app:
+    docker:
+      - image: circleci/node:4.8.2
+    steps:
+      - checkout
+      - run: echo "web-app"
+workflows:
+  version: 2
+  review-app:
+    jobs:
+      - web-server
+      - web-app
