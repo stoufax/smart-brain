@@ -1,14 +1,15 @@
 version: 2.1
 jobs:
-  web-server:
+  build:
     docker:
-      - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
+      - image: circleci/node::10.16.3 # the primary container, where your job's commands are run
     steps:
       - checkout # check out the code in the project directory
-      - run: echo "web-server" # run the `echo` command
+      - run: yarn install # run the `npm install` command
+      - run: yarn build
   web-app:
     docker:
-      - image: circleci/node:4.8.2
+      - image: circleci/node::10.16.3
     steps:
       - checkout
       - run: echo "web-app"
@@ -16,5 +17,5 @@ workflows:
   version: 2
   review-app:
     jobs:
-      - web-server
+      - build
       - web-app
