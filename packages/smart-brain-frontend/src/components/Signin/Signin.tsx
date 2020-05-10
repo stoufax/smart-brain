@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+
+import './Signin.css'
 
 import { config } from '../../config'
+import { useAuth } from '../contexts'
 
-interface Props {
-  updateRoute: any
-  loadUsers: any
-}
-const Signin: React.FC<Props> = ({ updateRoute, loadUsers }: Props) => {
+const Signin: React.FC = () => {
+  const { setUser } = useAuth()
+
   const [signInEmail, setSignInEmail] = useState('')
   const [signInPassword, setSignInPassword] = useState('')
 
@@ -28,9 +30,10 @@ const Signin: React.FC<Props> = ({ updateRoute, loadUsers }: Props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.email) {
-          updateRoute('home')
-          loadUsers(data)
+        if (data.success) {
+          window.sessionStorage.setItem('AUTH_TOKEN', data.token)
+          window.sessionStorage.setItem('AUTH_SESSION_ID', data.userId)
+          setUser(data.user)
         }
       })
   }
@@ -47,7 +50,7 @@ const Signin: React.FC<Props> = ({ updateRoute, loadUsers }: Props) => {
               </label>
               <input
                 onChange={onEmailChange}
-                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black"
                 type="email"
                 name="email-address"
                 id="email-address"
@@ -59,7 +62,7 @@ const Signin: React.FC<Props> = ({ updateRoute, loadUsers }: Props) => {
               </label>
               <input
                 onChange={onPasswordChange}
-                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black"
                 type="password"
                 name="password"
                 id="password"
@@ -75,9 +78,9 @@ const Signin: React.FC<Props> = ({ updateRoute, loadUsers }: Props) => {
             />
           </div>
           <div className="lh-copy mt3">
-            <p onClick={() => updateRoute('register')} className="f6 link dim black db pointer">
+            <Link className="f6 link dim black db pointer" to="register">
               Sign up
-            </p>
+            </Link>
           </div>
         </div>
       </main>

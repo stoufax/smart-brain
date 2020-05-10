@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 
+import './Register.css'
+
 import { config } from '../../config'
+import { useAuth } from '../contexts'
 
-interface Props {
-  updateRoute: any
-  loadUsers: any
-}
-
-const Register: React.FC<Props> = ({ updateRoute, loadUsers }: Props) => {
+const Register: React.FC = () => {
+  const { setUser } = useAuth()
   const [registerName, setRegisterName] = useState('')
   const [registerEmail, setRegisterEmail] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')
@@ -37,8 +36,7 @@ const Register: React.FC<Props> = ({ updateRoute, loadUsers }: Props) => {
       .then((response) => response.json())
       .then((user) => {
         if (user.email) {
-          loadUsers(user)
-          updateRoute('home')
+          setUser(user)
         }
       })
   }
@@ -55,7 +53,7 @@ const Register: React.FC<Props> = ({ updateRoute, loadUsers }: Props) => {
               </label>
               <input
                 onChange={onNameChange}
-                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black"
                 type="text"
                 name="name"
                 id="name"
@@ -67,7 +65,7 @@ const Register: React.FC<Props> = ({ updateRoute, loadUsers }: Props) => {
               </label>
               <input
                 onChange={onEmailChange}
-                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black"
                 type="email"
                 name="email"
                 id="email"
@@ -79,7 +77,7 @@ const Register: React.FC<Props> = ({ updateRoute, loadUsers }: Props) => {
               </label>
               <input
                 onChange={onPasswordChange}
-                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black"
                 type="password"
                 name="password-g"
                 id="password-g"
