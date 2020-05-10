@@ -3,12 +3,15 @@ const express = require('express')
 const cors = require('cors')
 const bcrypt = require('bcrypt')
 const knex = require('knex')
+const morgan = require('morgan')
+
 require('dotenv').config()
 
-const signin = require('./controllers/signin')
-const register = require('./controllers/register')
-const profile = require('./controllers/profile')
-const image = require('./controllers/image')
+const { signinAuthentication } = require('./controllers/signin')
+const { handleRegister } = require('./controllers/register')
+const { getProfile, updateProfile } = require('./controllers/profile')
+const { handleApiCall, handleApiCallCount } = require('./controllers/image')
+const auth = require('./controllers/authorization')
 
 const saltRounds = 10
 
@@ -24,29 +27,32 @@ const app = express()
 
 app.use(bodyParser.json())
 app.use(cors())
+app.use(morgan('combined'))
 
 app.get('/', (req, res) => {
   res.send('its working')
 })
 
-app.post('/signin', (req, res) => {
-  signin.handleSignin(req, res, db, bcrypt)
-})
+app.post('/signin', signinAuthentication(db, bcrypt))
 
 app.post('/register', (req, res) => {
-  register.handleRegister(req, res, db, bcrypt, saltRounds)
+  handleRegister(req, res, db, bcrypt, saltRounds)
 })
 
-app.get('/profile/:id', (req, res) => {
-  profile.handleProfile(req, res, db)
+app.get('/profile/:id', auth.requireAuth, (req, res) => {
+  getProfile(req, res, db)
 })
 
-app.put('/image', (req, res) => {
-  image.handleImage(req, res, db)
+app.put('/profile/:id', auth.requireAuth, (req, res) => {
+  updateProfile(req, res, db)
 })
 
-app.post('/imageUrl', (req, res) => {
-  image.handleApiCall(req, res, db)
+app.put('/image', auth.requireAuth, (req, res) => {
+  handleApiCallCount(req, res, db)
+})
+
+app.post('/imageUrl', auth.requireAuth, (req, res) => {
+  handleApiCall(req, res, db)
 })
 
 app.listen(process.env.PORT || 3000, () => {

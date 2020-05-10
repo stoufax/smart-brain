@@ -4,7 +4,7 @@ const app = new Clarifai.App({
   apiKey: process.env.CLARIFAI_API
 })
 
-const handleImage = (req, res, db) => {
+const handleApiCallCount = (req, res, db) => {
   const { id } = req.body
   return db('users')
     .where('id', '=', id)
@@ -13,7 +13,7 @@ const handleImage = (req, res, db) => {
     .then((entries) => {
       res.json(entries[0])
     })
-    .catch((err) => res.status(400).json('unable to get entries'))
+    .catch(() => res.status(400).json('unable to get entries'))
 }
 
 const handleApiCall = (req, res) => {
@@ -22,10 +22,10 @@ const handleApiCall = (req, res) => {
     .then((data) => {
       res.json(data)
     })
-    .catch((err) => res.status(400).json('API error'))
+    .catch(() => res.status(400).json('API error'))
 }
 
 module.exports = {
-  handleImage: handleImage,
-  handleApiCall: handleApiCall
+  handleApiCallCount,
+  handleApiCall
 }
