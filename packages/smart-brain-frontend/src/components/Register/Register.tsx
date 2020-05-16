@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import './Register.css';
 
@@ -33,12 +34,19 @@ const Register: React.FC = () => {
         password: registerPassword
       })
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Incorrect submission.');
+        }
+      })
       .then((user) => {
         if (user.email) {
           setUser(user);
         }
-      });
+      })
+      .catch((e) => toast(e.message, { type: 'error' }));
   };
 
   return (
@@ -84,7 +92,7 @@ const Register: React.FC = () => {
               />
             </div>
           </fieldset>
-          <div className="">
+          <div className="mt3">
             <input
               onClick={onSubmitChange}
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"

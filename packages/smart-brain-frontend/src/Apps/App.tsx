@@ -3,10 +3,10 @@ import Particles, { IParticlesParams } from 'react-particles-js';
 import { FaSpinner } from 'react-icons/fa';
 
 import './App.css';
-import { useAuth } from './components/contexts';
+import { useAuth } from '../components/contexts';
 
-const AuthenticatedApp = React.lazy(() => import('./Apps/AuthenticatedApp'));
-const UnauthenticatedApp = React.lazy(() => import('./Apps/UnauthenticatedApp'));
+const AuthenticatedApp = React.lazy(() => import('./AuthenticatedApp'));
+const UnauthenticatedApp = React.lazy(() => import('./UnauthenticatedApp'));
 
 const paramsParticle: IParticlesParams = {
   particles: {

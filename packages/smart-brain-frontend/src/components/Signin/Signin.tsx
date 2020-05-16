@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import './Signin.css';
 
@@ -28,14 +29,21 @@ const Signin: React.FC = () => {
         password: signInPassword
       })
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Incorrect username or password.');
+        }
+      })
       .then((data) => {
         if (data.success) {
           window.sessionStorage.setItem('AUTH_TOKEN', data.token);
           window.sessionStorage.setItem('AUTH_SESSION_ID', data.userId);
           setUser(data.user);
         }
-      });
+      })
+      .catch((e) => toast(e.message, { type: 'error' }));
   };
 
   return (

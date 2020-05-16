@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 import ImageLinkForm from '../ImageLinkForm/ImageLinkForm';
 import FaceRecognition, { Box } from '../FaceRecognition/FaceRecognition';
@@ -114,7 +113,6 @@ const Home: React.FC = () => {
           <Profile user={user} toggleModal={() => setIsModalOpen(!isModalOpen)} />
         </Modal>
       ) : null}
-      <ToastContainer />
     </div>
   );
 };

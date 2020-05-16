@@ -20,13 +20,13 @@ export const useAuthToken = () => {
           Authorization: token
         }
       })
-        .then((resp: any) => {
+        .then((resp) => {
           if (resp.ok) {
             return resp.json();
           }
           throw new Error('Unauthorized');
         })
-        .then((user: any) => {
+        .then((user) => {
           setUser(user[0]);
           setIsLoading(false);
         })
