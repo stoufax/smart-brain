@@ -5,8 +5,8 @@ import { FaSpinner } from 'react-icons/fa';
 import './App.css';
 import { useAuth } from './components/contexts';
 
-const AuthenticatedApp = React.lazy(() => import('./pages/AuthenticatedApp'));
-const UnauthenticatedApp = React.lazy(() => import('./pages/UnauthenticatedApp'));
+const AuthenticatedApp = React.lazy(() => import('./Apps/AuthenticatedApp'));
+const UnauthenticatedApp = React.lazy(() => import('./Apps/UnauthenticatedApp'));
 
 const paramsParticle: IParticlesParams = {
   particles: {
