@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import md5 from 'md5'
 
 import './Profile.css'
 import { useAuth } from '../contexts'
+import { config } from '../../config'
 
 interface Props {
   user: any
@@ -13,8 +15,10 @@ const Profile: React.FC<Props> = ({ toggleModal }: Props) => {
   const [name, setName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
 
+  const HashedEmail = md5(user.email)
+
   const onProfileUpdate = ({ id, name, email }: any) => {
-    fetch(`http://localhost:8000/profile/${id}`, {
+    fetch(config.backendUrl + `profile/${id}`, {
       method: 'put',
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +56,7 @@ const Profile: React.FC<Props> = ({ toggleModal }: Props) => {
     <div>
       <article className="br3 ba b--black-10 w-100 w-50-m pv3 w-25-l mw6 shadow-5 center bg-white">
         <main className="black-80 w-80">
-          <img src="http://tachyons.io/img/logo.jpg" className="h3 w3 dib" alt="avatar" />
+          <img src={`https://s.gravatar.com/avatar/${HashedEmail}?s=80`} className="h3 w3 dib" alt="avatar" />
           <h1>{user.name}</h1>
           <h4>{`Images submitted: ${user.entries}`}</h4>
           <p>{`Member since: ${new Date(user.joined).toLocaleDateString()}`}</p>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import ImageLinkForm from '../ImageLinkForm/ImageLinkForm'
 import FaceRecognition, { Box } from '../FaceRecognition/FaceRecognition'
@@ -7,7 +9,6 @@ import Profile from '../Profile/Profile'
 import Modal from '../Modal/Modal'
 import Rank from '../Rank/Rank'
 import Logo from '../Logo/Logo'
-
 import { config } from '../../config'
 import { useAuth } from '../contexts'
 
@@ -52,9 +53,16 @@ const Home: React.FC = () => {
       headers: { 'Content-Type': 'application/json', Authorization: token },
       body: JSON.stringify({ input })
     })
-      .then((response) => response.json())
       .then((response) => {
-        if (response && user) {
+        if (response.ok) {
+          return response.json()
+        } else {
+          toast('API error', { type: 'error' })
+          throw new Error('API error')
+        }
+      })
+      .then((response) => {
+        if (response) {
           fetch(config.backendUrl + 'image', {
             method: 'put',
             headers: { 'Content-Type': 'application/json', Authorization: token },
@@ -66,15 +74,17 @@ const Home: React.FC = () => {
             .then((count) => {
               setUser({ ...user, entries: count })
             })
-            .catch(console.log)
+            .catch(console.error)
         }
         setBoxes(boundingBox(response))
       })
       .catch(console.error)
   }
+
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
   }
+
   return (
     <div>
       <nav style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -104,6 +114,7 @@ const Home: React.FC = () => {
           <Profile user={user} toggleModal={() => setIsModalOpen(!isModalOpen)} />
         </Modal>
       ) : null}
+      <ToastContainer />
     </div>
   )
 }
