@@ -5,7 +5,7 @@
     "node": true,
     "commonjs": true
   },
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -31,25 +31,12 @@
         "plugin:import/warnings",
         "plugin:import/typescript",
         "plugin:react/recommended",
-        "plugin:react-hooks/recommended",
-        "plugin:prettier/recommended"
+        "plugin:react-hooks/recommended"
       ],
-      "plugins": ["@typescript-eslint"],
+      "plugins": ["@typescript-eslint/eslint-plugin"],
       "rules": {
         "@typescript-eslint/no-empty-interface": 1,
-        "@typescript-eslint/explicit-function-return-type": 0,
-        "@typescript-eslint/member-delimiter-style": [
-          "error",
-          {
-            "multiline": {
-              "delimiter": "none"
-            },
-            "singleline": {
-              "delimiter": "semi"
-            }
-          }
-        ],
-        "import/order": ["error", { "newlines-between": "always" }]
+        "@typescript-eslint/explicit-function-return-type": 0
       },
       "settings": {
         "react": {

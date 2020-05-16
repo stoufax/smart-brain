@@ -5,9 +5,12 @@
     "backend": "yarn workspace @smart-brain/api develop",
     "frontend": "yarn workspace @smart-brain/frontend start",
     "build:frontend": "yarn workspace @smart-brain/frontend build",
-    "lint": "eslint --ext .ts,.tsx,.js .",
-    "prettier:check": "prettier --check \"**/*.+(json|ts|tsx|js)\"",
-    "prettier:fix": "prettier --write"
+    "eslint:check": "eslint --ext .ts,.tsx,.js .",
+    "eslint:fix": "eslint --fix --ext .ts,.tsx,.js .",
+    "prettier:check": "prettier --check \"**/*.{scss,css,md,MD,html,json,yml}\"",
+    "prettier:fix": "prettier --write \"**/*.{scss,css,md,MD,html,json,yml}\"",
+    "format:check": "yarn eslint:check && yarn prettier:check",
+    "format:fix": "yarn eslint:fix && yarn prettier:fix"
   },
   "lint-staged": {
     "*.{scss,css,md,MD,html,json,yml}": "prettier --write",
