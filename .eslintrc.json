@@ -24,17 +24,32 @@
         }
       },
       "extends": [
-        "plugin:react/recommended",
+        "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
+        "plugin:react/recommended",
         "plugin:react-hooks/recommended",
-        "prettier/@typescript-eslint",
-        "prettier/react"
+        "plugin:prettier/recommended"
       ],
       "plugins": ["@typescript-eslint"],
       "rules": {
         "@typescript-eslint/no-empty-interface": 1,
-        "@typescript-eslint/explicit-function-return-type": 0
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/member-delimiter-style": [
+          "error",
+          {
+            "multiline": {
+              "delimiter": "none"
+            },
+            "singleline": {
+              "delimiter": "semi"
+            }
+          }
+        ],
+        "import/order": ["error", { "newlines-between": "always" }]
       },
       "settings": {
         "react": {

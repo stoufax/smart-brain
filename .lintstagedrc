@@ -1,8 +1,0 @@
-{
-   "*.+(ts|tsx)": [
-    "eslint"
-    ],
-  "*.+(json|ts|tsx)": [
-    "prettier --write",
-    ],
-}
