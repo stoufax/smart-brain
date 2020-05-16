@@ -1,9 +1,9 @@
-import React from 'react'
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom'
-import { FaSpinner } from 'react-icons/fa'
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
+import { FaSpinner } from 'react-icons/fa';
 
-const Register = React.lazy(() => import('../components/Register/Register'))
-const Signin = React.lazy(() => import('../components/Signin/Signin'))
+const Register = React.lazy(() => import('../components/Register/Register'));
+const Signin = React.lazy(() => import('../components/Signin/Signin'));
 
 const UnauthenticatedApp: React.FC = () => {
   return (
@@ -36,7 +36,7 @@ const UnauthenticatedApp: React.FC = () => {
         </div>
       </Router>
     </React.Suspense>
-  )
-}
+  );
+};
 
-export default UnauthenticatedApp
+export default UnauthenticatedApp;

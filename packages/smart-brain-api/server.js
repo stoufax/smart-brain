@@ -1,19 +1,19 @@
-const bodyParser = require('body-parser')
-const express = require('express')
-const cors = require('cors')
-const bcrypt = require('bcrypt')
-const knex = require('knex')
-const morgan = require('morgan')
+const bodyParser = require('body-parser');
+const express = require('express');
+const cors = require('cors');
+const bcrypt = require('bcrypt');
+const knex = require('knex');
+const morgan = require('morgan');
 
-require('dotenv').config()
+require('dotenv').config();
 
-const { signinAuthentication } = require('./controllers/signin')
-const { handleRegister } = require('./controllers/register')
-const { getProfile, updateProfile } = require('./controllers/profile')
-const { handleApiCall, handleApiCallCount } = require('./controllers/image')
-const auth = require('./controllers/authorization')
+const { signinAuthentication } = require('./controllers/signin');
+const { handleRegister } = require('./controllers/register');
+const { getProfile, updateProfile } = require('./controllers/profile');
+const { handleApiCall, handleApiCallCount } = require('./controllers/image');
+const auth = require('./controllers/authorization');
 
-const saltRounds = 10
+const saltRounds = 10;
 
 const db = knex({
   client: 'pg',
@@ -21,40 +21,40 @@ const db = knex({
     connectionString: process.env.DATABASE_URL_LOCAL || process.env.DATABASE_URL_HEROKU,
     ssl: process.env.DATABASE_URL_LOCAL ? false : true
   }
-})
+});
 
-const app = express()
+const app = express();
 
-app.use(bodyParser.json())
-app.use(cors())
-app.use(morgan('combined'))
+app.use(bodyParser.json());
+app.use(cors());
+app.use(morgan('combined'));
 
 app.get('/', (req, res) => {
-  res.send('its working')
-})
+  res.send('its working');
+});
 
-app.post('/signin', signinAuthentication(db, bcrypt))
+app.post('/signin', signinAuthentication(db, bcrypt));
 
 app.post('/register', (req, res) => {
-  handleRegister(req, res, db, bcrypt, saltRounds)
-})
+  handleRegister(req, res, db, bcrypt, saltRounds);
+});
 
 app.get('/profile/:id', auth.requireAuth, (req, res) => {
-  getProfile(req, res, db)
-})
+  getProfile(req, res, db);
+});
 
 app.put('/profile/:id', auth.requireAuth, (req, res) => {
-  updateProfile(req, res, db)
-})
+  updateProfile(req, res, db);
+});
 
 app.put('/image', auth.requireAuth, (req, res) => {
-  handleApiCallCount(req, res, db)
-})
+  handleApiCallCount(req, res, db);
+});
 
 app.post('/imageUrl', auth.requireAuth, (req, res) => {
-  handleApiCall(req, res, db)
-})
+  handleApiCall(req, res, db);
+});
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log('server is running on ' + process.env.PORT + ' PORT')
-})
+  console.log('server is running on ' + process.env.PORT + ' PORT');
+});

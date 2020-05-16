@@ -1,8 +1,8 @@
-import React from 'react'
-import Tilt from 'react-tilt'
+import React from 'react';
+import Tilt from 'react-tilt';
 
-import brain from './brain.png'
-import './Logo.css'
+import brain from './brain.png';
+import './Logo.css';
 
 const Logo = () => {
   return (
@@ -13,7 +13,7 @@ const Logo = () => {
         </div>
       </Tilt>
     </div>
-  )
-}
+  );
+};
 
-export default Logo
+export default Logo;

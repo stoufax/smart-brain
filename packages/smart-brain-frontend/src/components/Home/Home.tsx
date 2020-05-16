@@ -1,38 +1,38 @@
-import React, { useState } from 'react'
-import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import React, { useState } from 'react';
+import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import ImageLinkForm from '../ImageLinkForm/ImageLinkForm'
-import FaceRecognition, { Box } from '../FaceRecognition/FaceRecognition'
-import Profile from '../Profile/Profile'
-import Modal from '../Modal/Modal'
-import Rank from '../Rank/Rank'
-import Logo from '../Logo/Logo'
-import { config } from '../../config'
-import { useAuth } from '../contexts'
+import ImageLinkForm from '../ImageLinkForm/ImageLinkForm';
+import FaceRecognition, { Box } from '../FaceRecognition/FaceRecognition';
+import Profile from '../Profile/Profile';
+import Modal from '../Modal/Modal';
+import Rank from '../Rank/Rank';
+import Logo from '../Logo/Logo';
+import { config } from '../../config';
+import { useAuth } from '../contexts';
 
 const Home: React.FC = () => {
-  const { user, setUser } = useAuth()
+  const { user, setUser } = useAuth();
 
-  const [dropdownOpen, setOpen] = useState(false)
+  const [dropdownOpen, setOpen] = useState(false);
 
-  const [boxes, setBoxes] = useState<Box[]>([])
-  const [input, setInput] = useState('')
-  const [imageUrl, setImageUrl] = useState('')
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [boxes, setBoxes] = useState<Box[]>([]);
+  const [input, setInput] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const toggle = () => setOpen(!dropdownOpen)
+  const toggle = () => setOpen(!dropdownOpen);
 
   const onInputChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>): void => {
-    setInput(value)
-  }
+    setInput(value);
+  };
 
   const boundingBox = (data: any): Box[] => {
-    const infoBox = data.outputs[0].data.regions
-    const sizeImage: any = document.querySelector('#faceReco')
-    const width = Number(sizeImage.width)
-    const height = Number(sizeImage.height)
+    const infoBox = data.outputs[0].data.regions;
+    const sizeImage: any = document.querySelector('#faceReco');
+    const width = Number(sizeImage.width);
+    const height = Number(sizeImage.height);
 
     return infoBox.map((data: any) => {
       return {
@@ -40,13 +40,13 @@ const Home: React.FC = () => {
         righCol: width - data.region_info.bounding_box.right_col * width,
         topRow: data.region_info.bounding_box.top_row * height,
         bottomRow: height - data.region_info.bounding_box.bottom_row * height
-      }
-    })
-  }
+      };
+    });
+  };
 
   const onButtonChange = (): void => {
-    setImageUrl(input)
-    const token = window.sessionStorage.getItem('AUTH_TOKEN') || ''
+    setImageUrl(input);
+    const token = window.sessionStorage.getItem('AUTH_TOKEN') || '';
 
     fetch(config.backendUrl + 'imageUrl', {
       method: 'post',
@@ -55,10 +55,10 @@ const Home: React.FC = () => {
     })
       .then((response) => {
         if (response.ok) {
-          return response.json()
+          return response.json();
         } else {
-          toast('API error', { type: 'error' })
-          throw new Error('API error')
+          toast('API error', { type: 'error' });
+          throw new Error('API error');
         }
       })
       .then((response) => {
@@ -72,18 +72,18 @@ const Home: React.FC = () => {
           })
             .then((response) => response.json())
             .then((count) => {
-              setUser({ ...user, entries: count })
+              setUser({ ...user, entries: count });
             })
-            .catch(console.error)
+            .catch(console.error);
         }
-        setBoxes(boundingBox(response))
+        setBoxes(boundingBox(response));
       })
-      .catch(console.error)
-  }
+      .catch(console.error);
+  };
 
   const toggleModal = () => {
-    setIsModalOpen(!isModalOpen)
-  }
+    setIsModalOpen(!isModalOpen);
+  };
 
   return (
     <div>
@@ -96,8 +96,8 @@ const Home: React.FC = () => {
             <DropdownItem onClick={() => toggleModal()}>Account settings</DropdownItem>
             <DropdownItem
               onClick={() => {
-                window.sessionStorage.clear()
-                setUser(null)
+                window.sessionStorage.clear();
+                setUser(null);
               }}
             >
               Log out
@@ -116,6 +116,6 @@ const Home: React.FC = () => {
       ) : null}
       <ToastContainer />
     </div>
-  )
-}
-export default Home
+  );
+};
+export default Home;

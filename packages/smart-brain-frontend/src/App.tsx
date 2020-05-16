@@ -1,12 +1,12 @@
-import React from 'react'
-import Particles, { IParticlesParams } from 'react-particles-js'
-import { FaSpinner } from 'react-icons/fa'
+import React from 'react';
+import Particles, { IParticlesParams } from 'react-particles-js';
+import { FaSpinner } from 'react-icons/fa';
 
-import './App.css'
-import { useAuth } from './components/contexts'
+import './App.css';
+import { useAuth } from './components/contexts';
 
-const AuthenticatedApp = React.lazy(() => import('./pages/AuthenticatedApp'))
-const UnauthenticatedApp = React.lazy(() => import('./pages/UnauthenticatedApp'))
+const AuthenticatedApp = React.lazy(() => import('./pages/AuthenticatedApp'));
+const UnauthenticatedApp = React.lazy(() => import('./pages/UnauthenticatedApp'));
 
 const paramsParticle: IParticlesParams = {
   particles: {
@@ -19,10 +19,10 @@ const paramsParticle: IParticlesParams = {
       }
     }
   }
-}
+};
 
 const App: React.FC = () => {
-  const { user } = useAuth()
+  const { user } = useAuth();
 
   return (
     <div className="App">
@@ -37,7 +37,7 @@ const App: React.FC = () => {
         {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
       </React.Suspense>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

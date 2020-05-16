@@ -1,23 +1,23 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import './Signin.css'
+import './Signin.css';
 
-import { config } from '../../config'
-import { useAuth } from '../contexts'
+import { config } from '../../config';
+import { useAuth } from '../contexts';
 
 const Signin: React.FC = () => {
-  const { setUser } = useAuth()
+  const { setUser } = useAuth();
 
-  const [signInEmail, setSignInEmail] = useState('')
-  const [signInPassword, setSignInPassword] = useState('')
+  const [signInEmail, setSignInEmail] = useState('');
+  const [signInPassword, setSignInPassword] = useState('');
 
   const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setSignInEmail(event.target.value)
-  }
+    setSignInEmail(event.target.value);
+  };
   const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setSignInPassword(event.target.value)
-  }
+    setSignInPassword(event.target.value);
+  };
 
   const onSubmitChange = (): void => {
     fetch(config.backendUrl + 'signin', {
@@ -31,12 +31,12 @@ const Signin: React.FC = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          window.sessionStorage.setItem('AUTH_TOKEN', data.token)
-          window.sessionStorage.setItem('AUTH_SESSION_ID', data.userId)
-          setUser(data.user)
+          window.sessionStorage.setItem('AUTH_TOKEN', data.token);
+          window.sessionStorage.setItem('AUTH_SESSION_ID', data.userId);
+          setUser(data.user);
         }
-      })
-  }
+      });
+  };
 
   return (
     <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
@@ -85,7 +85,7 @@ const Signin: React.FC = () => {
         </div>
       </main>
     </article>
-  )
-}
+  );
+};
 
-export default Signin
+export default Signin;

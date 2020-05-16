@@ -1,21 +1,21 @@
-import React, { useState } from 'react'
-import md5 from 'md5'
+import React, { useState } from 'react';
+import md5 from 'md5';
 
-import './Profile.css'
-import { useAuth } from '../contexts'
-import { config } from '../../config'
+import './Profile.css';
+import { useAuth } from '../contexts';
+import { config } from '../../config';
 
 interface Props {
-  user: any
-  toggleModal?: () => void
+  user: any;
+  toggleModal?: () => void;
 }
 
 const Profile: React.FC<Props> = ({ toggleModal }: Props) => {
-  const { user, setUser } = useAuth()
-  const [name, setName] = useState(user.name)
-  const [email, setEmail] = useState(user.email)
+  const { user, setUser } = useAuth();
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
 
-  const HashedEmail = md5(user.email)
+  const HashedEmail = md5(user.email);
 
   const onProfileUpdate = ({ id, name, email }: any) => {
     fetch(config.backendUrl + `profile/${id}`, {
@@ -31,26 +31,26 @@ const Profile: React.FC<Props> = ({ toggleModal }: Props) => {
     })
       .then((resp) => {
         if (resp.status === 200 || resp.status === 304) {
-          toggleModal && toggleModal()
-          setUser({ ...user, name, email })
+          toggleModal && toggleModal();
+          setUser({ ...user, name, email });
         }
       })
-      .catch(console.log)
-  }
+      .catch(console.log);
+  };
 
   const onFormChange = (event: any) => {
     switch (event.target.name) {
       case 'user-name':
-        setName(event.target.value)
-        break
+        setName(event.target.value);
+        break;
       case 'user-email':
-        setEmail(event.target.value)
-        break
+        setEmail(event.target.value);
+        break;
 
       default:
-        return
+        return;
     }
-  }
+  };
 
   return (
     <div>
@@ -99,7 +99,7 @@ const Profile: React.FC<Props> = ({ toggleModal }: Props) => {
         </div>
       </article>
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

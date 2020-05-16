@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 
-import './ImageLinkForm.css'
+import './ImageLinkForm.css';
 
 interface Props {
-  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  onButtonChange: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onButtonChange: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 const ImageLinkForm: React.FC<Props> = ({ onInputChange, onButtonChange }: Props) => {
@@ -18,7 +18,7 @@ const ImageLinkForm: React.FC<Props> = ({ onInputChange, onButtonChange }: Props
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ImageLinkForm
+export default ImageLinkForm;

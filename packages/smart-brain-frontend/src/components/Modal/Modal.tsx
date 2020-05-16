@@ -1,13 +1,13 @@
-import React, { ReactNode } from 'react'
-import Modal from 'react-modal'
+import React, { ReactNode } from 'react';
+import Modal from 'react-modal';
 
-import './Modal.css'
+import './Modal.css';
 
 interface Props {
-  children: ReactNode
+  children: ReactNode;
 }
 
-Modal.setAppElement('#root')
+Modal.setAppElement('#root');
 
 const ProfileModal: React.FC<Props> = ({ children }: Props) => {
   return (
@@ -30,6 +30,6 @@ const ProfileModal: React.FC<Props> = ({ children }: Props) => {
     >
       {children}
     </Modal>
-  )
-}
-export default ProfileModal
+  );
+};
+export default ProfileModal;

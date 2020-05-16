@@ -1,7 +1,7 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import React from 'react';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
-import Home from '../components/Home/Home'
+import Home from '../components/Home/Home';
 
 const AuthenticatedApp: React.FC = () => {
   return (
@@ -11,6 +11,6 @@ const AuthenticatedApp: React.FC = () => {
       </Route>
       <Redirect to="/" />
     </Router>
-  )
-}
-export default AuthenticatedApp
+  );
+};
+export default AuthenticatedApp;

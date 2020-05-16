@@ -1,27 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import './Register.css'
+import './Register.css';
 
-import { config } from '../../config'
-import { useAuth } from '../contexts'
+import { config } from '../../config';
+import { useAuth } from '../contexts';
 
 const Register: React.FC = () => {
-  const { setUser } = useAuth()
-  const [registerName, setRegisterName] = useState('')
-  const [registerEmail, setRegisterEmail] = useState('')
-  const [registerPassword, setRegisterPassword] = useState('')
+  const { setUser } = useAuth();
+  const [registerName, setRegisterName] = useState('');
+  const [registerEmail, setRegisterEmail] = useState('');
+  const [registerPassword, setRegisterPassword] = useState('');
 
   const onNameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setRegisterName(event.target.value)
-  }
+    setRegisterName(event.target.value);
+  };
 
   const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setRegisterEmail(event.target.value)
-  }
+    setRegisterEmail(event.target.value);
+  };
 
   const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setRegisterPassword(event.target.value)
-  }
+    setRegisterPassword(event.target.value);
+  };
 
   const onSubmitChange = (): void => {
     fetch(config.backendUrl + 'register', {
@@ -36,10 +36,10 @@ const Register: React.FC = () => {
       .then((response) => response.json())
       .then((user) => {
         if (user.email) {
-          setUser(user)
+          setUser(user);
         }
-      })
-  }
+      });
+  };
 
   return (
     <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
@@ -95,7 +95,7 @@ const Register: React.FC = () => {
         </div>
       </main>
     </article>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
