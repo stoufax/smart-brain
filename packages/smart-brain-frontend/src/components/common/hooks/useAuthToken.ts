@@ -33,5 +33,9 @@ export const useAuthToken = () => {
         .catch(() => setIsLoading(false));
     }
   }, [id, token]);
-  return { user, setUser, isLoading };
+  return {
+    user,
+    setUser,
+    isLoading
+  };
 };

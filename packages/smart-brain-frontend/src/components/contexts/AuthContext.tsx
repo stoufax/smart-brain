@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { FaSpinner } from 'react-icons/fa';
 
 import { useAuthToken } from '../common/hooks/useAuthToken';
@@ -12,7 +12,7 @@ export interface User {
 }
 
 interface AuthContextType {
-  user: User;
+  user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
@@ -21,8 +21,9 @@ const AuthContext = React.createContext<AuthContextType>({
   setUser: () => ({})
 });
 
-const AuthProvider = (props: any) => {
+const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { user, setUser, isLoading } = useAuthToken();
+
   if (isLoading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
@@ -30,7 +31,8 @@ const AuthProvider = (props: any) => {
       </div>
     );
   }
-  return <AuthContext.Provider value={{ user, setUser }} {...props} />;
+
+  return <AuthContext.Provider value={{ user, setUser }}>{children}</AuthContext.Provider>;
 };
 
 const useAuth = () => {

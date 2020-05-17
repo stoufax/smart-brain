@@ -34,7 +34,7 @@ const App: React.FC = () => {
           </div>
         }
       >
-        {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+        {user ? <AuthenticatedApp user={user} /> : <UnauthenticatedApp />}
       </React.Suspense>
     </div>
   );

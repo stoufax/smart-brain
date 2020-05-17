@@ -10,9 +10,13 @@ import Rank from '../Rank/Rank';
 import Logo from '../Logo/Logo';
 import { config } from '../../config';
 import { useAuth } from '../contexts';
+import { User } from '../contexts/AuthContext';
 
-const Home: React.FC = () => {
-  const { user, setUser } = useAuth();
+interface Props {
+  user: User;
+}
+const Home: React.FC<Props> = ({ user }: Props) => {
+  const { setUser } = useAuth();
 
   const [dropdownOpen, setOpen] = useState(false);
 
@@ -104,7 +108,7 @@ const Home: React.FC = () => {
           </DropdownMenu>
         </ButtonDropdown>
       </nav>
-      <Rank name={user.name} entries={user.entries} />
+      <Rank name={(user && user.name) || ''} entries={(user && user.entries) || 0} />
       <Logo />
       <ImageLinkForm onInputChange={onInputChange} onButtonChange={onButtonChange} />
       <FaceRecognition image={imageUrl} boxes={boxes} />

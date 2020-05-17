@@ -4,14 +4,15 @@ import md5 from 'md5';
 import './Profile.css';
 import { useAuth } from '../contexts';
 import { config } from '../../config';
+import { User } from '../contexts/AuthContext';
 
 interface Props {
-  user: any;
+  user: User;
   toggleModal?: () => void;
 }
 
-const Profile: React.FC<Props> = ({ toggleModal }: Props) => {
-  const { user, setUser } = useAuth();
+const Profile: React.FC<Props> = ({ toggleModal, user }: Props) => {
+  const { setUser } = useAuth();
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
 
