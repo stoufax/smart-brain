@@ -5,7 +5,7 @@ services:
   smart-brain-api:
     container_name: backend
     build: ./
-    command: yarn develop
+    command: yarn start
     ports:
       - 8000:8000
     volumes:

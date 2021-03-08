@@ -7,8 +7,8 @@ export const useAuthToken = () => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const token = window.sessionStorage.getItem('AUTH_TOKEN') || '';
-  const id = window.sessionStorage.getItem('AUTH_SESSION_ID');
+  const token = sessionStorage.getItem('AUTH_TOKEN') || '';
+  const id = sessionStorage.getItem('AUTH_SESSION_ID');
 
   useEffect(() => {
     if (token && id) {

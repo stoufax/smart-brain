@@ -49,8 +49,8 @@ const Home: React.FC<Props> = ({ user }: Props) => {
 
   const onButtonChange = (): void => {
     setImageUrl(input);
-    const token = window.sessionStorage.getItem('AUTH_TOKEN') || '';
-
+    const token = sessionStorage.getItem('AUTH_TOKEN') || '';
+    localStorage.clear();
     fetch(config.backendUrl + 'imageUrl', {
       method: 'post',
       headers: { 'Content-Type': 'application/json', Authorization: token },
@@ -99,7 +99,7 @@ const Home: React.FC<Props> = ({ user }: Props) => {
             <DropdownItem onClick={() => toggleModal()}>Account settings</DropdownItem>
             <DropdownItem
               onClick={() => {
-                window.sessionStorage.clear();
+                sessionStorage.clear();
                 setUser(null);
               }}
             >

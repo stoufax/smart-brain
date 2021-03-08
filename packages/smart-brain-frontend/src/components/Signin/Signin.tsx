@@ -38,8 +38,8 @@ const Signin: React.FC = () => {
       })
       .then((data) => {
         if (data.success) {
-          window.sessionStorage.setItem('AUTH_TOKEN', data.token);
-          window.sessionStorage.setItem('AUTH_SESSION_ID', data.userId);
+          sessionStorage.setItem('AUTH_TOKEN', data.token);
+          sessionStorage.setItem('AUTH_SESSION_ID', data.userId);
           setUser(data.user);
         }
       })

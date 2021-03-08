@@ -23,7 +23,7 @@ const Profile: React.FC<Props> = ({ toggleModal, user }: Props) => {
       method: 'put',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: window.sessionStorage.getItem('AUTH_TOKEN') || ''
+        Authorization: sessionStorage.getItem('AUTH_TOKEN') || ''
       },
       body: JSON.stringify({
         name,
@@ -39,7 +39,7 @@ const Profile: React.FC<Props> = ({ toggleModal, user }: Props) => {
       .catch(console.log);
   };
 
-  const onFormChange = (event: any) => {
+  const onFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     switch (event.target.name) {
       case 'user-name':
         setName(event.target.value);
