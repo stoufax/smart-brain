@@ -9,8 +9,8 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./:/usr/src/smart-brain-backend
-      - /usr/src/smart-brain-backend/node_modules
+      - ./:/usr/smart-brain-api
+      - /usr/smart-brain-api/node_modules
 
   #Postgres
   postgres:
