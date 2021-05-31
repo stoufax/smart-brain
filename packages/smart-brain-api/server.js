@@ -26,7 +26,7 @@ const db = knex({
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({origin:"https://vigorous-joliot-ef76eb.netlify.app"}));
 app.use(morgan('combined'));
 
 app.get('/', (req, res) => {
