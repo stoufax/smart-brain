@@ -18,10 +18,10 @@ const saltRounds = 10;
 const db = knex({
   client: 'pg',
   connection: {
-    user: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASSWORD,
-    database: process.env.POSTGRES_DB,
-    host: process.env.POSTGRES_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    host: process.env.DB_HOST,
     ssl: false
   }
 });
