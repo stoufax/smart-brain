@@ -18,15 +18,18 @@ const saltRounds = 10;
 const db = knex({
   client: 'pg',
   connection: {
-    connectionString: process.env.DATABASE_URL_LOCAL || process.env.DATABASE_URL_HEROKU,
-    ssl: process.env.DATABASE_URL_LOCAL ? false : true
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DB,
+    host: process.env.POSTGRES_HOST,
+    ssl: false
   }
 });
 
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors({origin:"https://vigorous-joliot-ef76eb.netlify.app"}));
+app.use(cors({ origin: 'https://vigorous-joliot-ef76eb.netlify.app' }));
 app.use(morgan('combined'));
 
 app.get('/', (req, res) => {
