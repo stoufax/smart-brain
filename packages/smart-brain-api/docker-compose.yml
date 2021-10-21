@@ -2,15 +2,15 @@ version: '3.7'
 
 services:
   #Backend api
-  smart-brain-api:
-    container_name: backend
-    build: ./
-    command: yarn start
-    ports:
-      - 8000:8000
-    volumes:
-      - ./:/usr/smart-brain-api
-      - /usr/smart-brain-api/node_modules
+  # smart-brain-api:
+  #   container_name: backend
+  #   build: ./
+  #   command: yarn start
+  #   ports:
+  #     - 8000:8000
+  #   volumes:
+  #     - ./:/usr/smart-brain-api
+  #     - /usr/smart-brain-api/node_modules
 
   #Postgres
   postgres:

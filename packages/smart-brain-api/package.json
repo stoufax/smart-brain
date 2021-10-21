@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start ecosystem.config.js --env production",
+    "start": "pm2 startOrRestart ecosystem.config.js --env production",
     "develop": "nodemon server.js",
-    "docker": "docker-compose -f ./docker-compose.yml up -d --build"
+    "docker": "docker-compose -f ./docker-compose.yml up -d"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +22,7 @@
     "knex": "^0.95.11",
     "morgan": "^1.10.0",
     "pg": "^8.7.1",
-    "pm2": "^4.5.5",
+    "pm2": "^5.1.2",
     "redis": "^3.0.2"
   },
   "devDependencies": {

@@ -1,4 +1,3 @@
-const bodyParser = require('body-parser');
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
@@ -28,12 +27,12 @@ const db = knex({
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors({ origin: 'https://vigorous-joliot-ef76eb.netlify.app' }));
 app.use(morgan('combined'));
 
 app.get('/', (req, res) => {
-  res.send('its working');
+  res.send('Server is alive!');
 });
 
 app.post('/signin', signinAuthentication(db, bcrypt));

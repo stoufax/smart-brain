@@ -1,6 +1,6 @@
 FROM node:lts
 
-WORKDIR /usr/src/smart-brain-backend
+WORKDIR /usr/src/smart-brain-api
 
 COPY ./package.json yarn.lock ./
 
