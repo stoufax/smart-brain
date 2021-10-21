@@ -1,10 +1,9 @@
 const express = require('express');
+require('dotenv').config();
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const knex = require('knex');
 const morgan = require('morgan');
-
-require('dotenv').config();
 
 const { signinAuthentication } = require('./controllers/signin');
 const { handleRegister } = require('./controllers/register');

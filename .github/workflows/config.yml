@@ -1,4 +1,4 @@
-name: CI
+name: CD
 on: push
 jobs:
   build:
@@ -18,4 +18,4 @@ jobs:
           SSH_PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
           SSH_KNOWN_HOSTS: ${{secrets.KNOWN_HOSTS}}
       - name: Run deploy
-        run: cd packages/smart-brain-api && CLARIFAI_API=$CLARIFAI_API pm2 deploy production
+        run: cd packages/smart-brain-api && pm2 deploy production
