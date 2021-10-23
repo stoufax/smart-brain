@@ -17,5 +17,5 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
           SSH_KNOWN_HOSTS: ${{secrets.KNOWN_HOSTS}}
-      - name: Run deploy
+      - name: Run deploy api & webapp
         run: cd packages/smart-brain-api && pm2 deploy production

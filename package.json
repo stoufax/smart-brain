@@ -2,8 +2,11 @@
   "name": "smart-brain",
   "private": true,
   "scripts": {
-    "backend": "yarn workspace @smart-brain/api develop",
-    "frontend": "yarn workspace @smart-brain/frontend start",
+    "setup":"yarn workspace @smart-brain/api setup && yarn workspace @smart-brain/frontend setup",
+    "develop:backend": "yarn workspace @smart-brain/api develop",
+    "start:backend": "yarn workspace @smart-brain/api start",
+    "docker": "yarn workspace @smart-brain/api docker",
+    "develop:frontend": "yarn workspace @smart-brain/frontend start",
     "build:frontend": "yarn workspace @smart-brain/frontend build",
     "eslint:check": "eslint --ext .ts,.tsx,.js .",
     "eslint:fix": "eslint --fix --ext .ts,.tsx,.js .",

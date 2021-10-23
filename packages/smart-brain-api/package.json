@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 startOrRestart ecosystem.config.js --env production",
-    "develop": "nodemon server.js",
-    "docker": "docker-compose -f ./docker-compose.yml up -d"
+    "develop": "nodemon src/server.js",
+    "docker": "docker-compose -f ./docker-compose.yml up -d",
+    "setup": "yarn",
+    "start": "pm2 startOrRestart ecosystem.config.js --env production"
   },
   "keywords": [],
   "author": "",
@@ -17,13 +18,14 @@
     "clarifai": "^2.9.0",
     "cors": "^2.8.4",
     "dotenv": "^8.2.0",
-    "express": "^4.16.3",
+    "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.11",
     "morgan": "^1.10.0",
     "pg": "^8.7.1",
     "pm2": "^5.1.2",
-    "redis": "^3.0.2"
+    "redis": "^3.0.2",
+    "serve-static": "^1.14.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

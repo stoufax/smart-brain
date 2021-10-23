@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 import { FaSpinner } from 'react-icons/fa';
+import { getPath } from '../utils';
 
 const Register = React.lazy(() => import('../components/Register/Register'));
 const Signin = React.lazy(() => import('../components/Signin/Signin'));
@@ -17,21 +18,21 @@ const UnauthenticatedApp: React.FC = () => {
       <Router>
         <div>
           <nav style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Link className="f3 link dim black underline pa3 pointer" to="/signin">
+            <Link className="f3 link dim black underline pa3 pointer" to={getPath('/signin')}>
               Signin
             </Link>
-            <Link className="f3 link dim black underline pa3 pointer" to="/register">
+            <Link className="f3 link dim black underline pa3 pointer" to={getPath('/register')}>
               Register
             </Link>
           </nav>
           <Switch>
-            <Route path="/signin">
+            <Route path={getPath('/signin')}>
               <Signin />
             </Route>
-            <Route path="/register">
+            <Route path={getPath('/register')}>
               <Register />
             </Route>
-            <Redirect to="/signin" />
+            <Redirect to={getPath('/signin')} />
           </Switch>
         </div>
       </Router>

@@ -15,7 +15,7 @@ services:
   #Postgres
   postgres:
     container_name: postgres
-    build: ./postgres
+    image: postgres
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}

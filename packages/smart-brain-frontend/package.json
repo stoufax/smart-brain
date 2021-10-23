@@ -20,9 +20,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "PUBLIC_URL=/smart-brain react-scripts build",
+    "postbuild": "rm -rf ../smart-brain-api/wwwroot && cp -r ./build ../smart-brain-api/wwwroot",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "setup": "yarn"
   },
   "browserslist": [
     ">0.2%",

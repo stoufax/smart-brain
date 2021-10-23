@@ -6,6 +6,7 @@ import './Signin.css';
 
 import { config } from '../../config';
 import { useAuth } from '../contexts';
+import { getPath } from '../../utils';
 
 const Signin: React.FC = () => {
   const { setUser } = useAuth();
@@ -86,7 +87,7 @@ const Signin: React.FC = () => {
             />
           </div>
           <div className="lh-copy mt3">
-            <Link className="f6 link dim black db pointer" to="register">
+            <Link className="f6 link dim black db pointer" to={getPath('/register')}>
               Sign up
             </Link>
           </div>

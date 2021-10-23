@@ -14,11 +14,10 @@ interface Props {
 const Profile: React.FC<Props> = ({ toggleModal, user }: Props) => {
   const { setUser } = useAuth();
   const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-
+  console.log(`user`, user);
   const HashedEmail = md5(user.email);
 
-  const onProfileUpdate = ({ id, name, email }: any) => {
+  const onProfileUpdate = ({ id, name }: any) => {
     fetch(config.backendUrl + `profile/${id}`, {
       method: 'put',
       headers: {
@@ -26,28 +25,24 @@ const Profile: React.FC<Props> = ({ toggleModal, user }: Props) => {
         Authorization: sessionStorage.getItem('AUTH_TOKEN') || ''
       },
       body: JSON.stringify({
-        name,
-        email
+        name
       })
     })
       .then((resp) => {
         if (resp.status === 200 || resp.status === 304) {
           toggleModal && toggleModal();
-          setUser({ ...user, name, email });
+          setUser({ ...user, name });
         }
       })
       .catch(console.log);
   };
 
   const onFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(`vent.target.name`, event.target.name);
     switch (event.target.name) {
       case 'user-name':
         setName(event.target.value);
         break;
-      case 'user-email':
-        setEmail(event.target.value);
-        break;
-
       default:
         return;
     }
@@ -65,28 +60,15 @@ const Profile: React.FC<Props> = ({ toggleModal, user }: Props) => {
           <label className="mt2 fw6" htmlFor="user-name">
             Name:
           </label>
-          <input
-            onChange={onFormChange}
-            type="text"
-            name="user-name"
-            className="pa2 ba w-100"
-            placeholder={user.name}
-          ></input>
-          <label className="mt2 fw6" htmlFor="user-age">
-            Email:
-          </label>
-          <input
-            onChange={onFormChange}
-            type="text"
-            name="user-email"
-            className="pa2 ba w-100"
-            placeholder={user.email}
-          ></input>
+          <input onChange={onFormChange} type="text" name="user-name" className="pa2 ba w-100" value={name}></input>
+
+          <span className="mt2 fw6">Email:</span>
+          <div className="pa2  w-100">{user.email}</div>
 
           <div className="mt4" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
             <button
               className="b pa2 grow pointer hover-white w-40 bg-light-blue b--black-20"
-              onClick={() => onProfileUpdate({ ...user, name, email })}
+              onClick={() => onProfileUpdate({ ...user, name })}
             >
               Save
             </button>

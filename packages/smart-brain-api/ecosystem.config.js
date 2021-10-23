@@ -1,8 +1,8 @@
 module.exports = {
   apps: [
     {
-      name: 'app',
-      script: 'server.js',
+      name: 'Backend & webapp',
+      script: 'src/server.js',
       env_production: {
         NODE_ENV: 'production'
       }
@@ -10,13 +10,13 @@ module.exports = {
   ],
   deploy: {
     production: {
-      user: 'root', // user used to authenticate
-      host: '51.89.23.86', // where to connect
+      user: 'root',
+      host: '51.89.23.86',
       key: '~/.ssh/deploy.key',
       ref: 'origin/master',
       repo: 'git@github.com:stoufax/smart-brain.git',
       path: '/var/www/app',
-      'post-deploy': 'cd packages/smart-brain-api && npm install && npm run docker && npm start'
+      'post-deploy': 'yarn setup && yarn build:frontend && yarn docker && yarn start:backend'
     }
   }
 };

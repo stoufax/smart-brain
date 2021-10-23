@@ -26,7 +26,6 @@ const createSession = (user) => {
 
 const handleSignin = (db, bcrypt, req, res) => {
   const { email, password } = req.body;
-
   if (!email || !password) {
     return Promise.reject('incorrect form submission');
   }

@@ -16,23 +16,20 @@ const getProfile = (req, res, db) => {
 
 const updateProfile = (req, res, db) => {
   const { id } = req.params;
-  const { name, email } = req.body;
+  const { name } = req.body;
+
   db.transaction((trx) => {
     trx
-      .select('*')
-      .from('login')
-      .where({ id })
-      .update({ email }, ['*'])
-      .returning('email')
-      .then((loginEmail) => {
-        return db('users')
-          .where({ id })
-          .update({ email: loginEmail[0], name })
-          .then((user) => res.json(user[0]));
-      })
+      .update('name', name)
+      .where('id', id)
+      .from('users')
       .then(trx.commit)
+      .then((user) => res.json(user[0]))
       .catch(trx.rollback);
-  }).catch(() => res.status(400).json('UNABLE TO UPDATE PROFILE'));
+  }).catch((error) => {
+    console.log(`error =>`, error);
+    res.status(400).json('UNABLE TO UPDATE PROFILE');
+  });
 };
 
 module.exports = {
