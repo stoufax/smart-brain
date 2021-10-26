@@ -11,23 +11,25 @@ import { getPath } from '../../utils';
 const Signin: React.FC = () => {
   const { setUser } = useAuth();
 
-  const [signInEmail, setSignInEmail] = useState('');
-  const [signInPassword, setSignInPassword] = useState('');
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
 
-  const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setSignInEmail(event.target.value);
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setEmail(event.target.value);
   };
-  const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setSignInPassword(event.target.value);
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setPassword(event.target.value);
   };
 
-  const onSubmitChange = (): void => {
+  const onSubmitChange = (event: React.SyntheticEvent): void => {
+    event.preventDefault();
+
     fetch(config.backendUrl + 'signin', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email: signInEmail,
-        password: signInPassword
+        email,
+        password
       })
     })
       .then((response) => {
@@ -48,7 +50,7 @@ const Signin: React.FC = () => {
   };
 
   return (
-    <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
+    <form className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
       <main className="pa4 black-80">
         <div className="measure">
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
@@ -58,8 +60,8 @@ const Signin: React.FC = () => {
                 Email
               </label>
               <input
-                onChange={onEmailChange}
-                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black"
+                onChange={handleEmailChange}
+                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                 type="email"
                 name="email-address"
                 id="email-address"
@@ -70,8 +72,8 @@ const Signin: React.FC = () => {
                 Password
               </label>
               <input
-                onChange={onPasswordChange}
-                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black"
+                onChange={handlePasswordChange}
+                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                 type="password"
                 name="password"
                 id="password"
@@ -93,7 +95,7 @@ const Signin: React.FC = () => {
           </div>
         </div>
       </main>
-    </article>
+    </form>
   );
 };
 
