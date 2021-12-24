@@ -41,7 +41,7 @@ function registerRoutes() {
   const router = express.Router();
 
   router.get('/', (req, res) => {
-    res.send('Server is alive!');
+    res.send('Server status: live ');
   });
 
   router.post('/signin', signinAuthentication(db, bcrypt));
